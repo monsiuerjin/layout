@@ -1,0 +1,68 @@
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="@color/white"
+    android:padding="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <!-- Logo -->
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/logo_dark_mini2x"
+            android:layout_marginStart="8dp"/>
+
+        <!-- Thanh tìm kiếm -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="2dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@android:color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_search"
+                    android:tint="#7A7A7A"/>
+
+                <EditText
+                    android:id="@+id/search_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Tìm kiếm..."
+                    android:background="@null"
+                    android:textSize="16sp"
+                    android:paddingStart="8dp"
+                    android:textColorHint="#757575"/>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- Nút Menu -->
+        <ImageView
+            android:id="@+id/menuIcon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/menu"
+            android:layout_marginEnd="8dp"/>
+    </LinearLayout>
+
+</androidx.appcompat.widget.Toolbar>

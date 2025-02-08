@@ -1,0 +1,107 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F2FFF8">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        android:layout_above="@id/bottom_toolbar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Nút Back -->
+            <ImageView
+                android:id="@+id/btn_back"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/ic_back"
+                android:padding="8dp"/>
+
+            <!-- Ảnh sản phẩm -->
+            <ImageView
+                android:id="@+id/detail_image"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/vivobook" />
+
+            <TextView
+                android:id="@+id/detail_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:layout_marginTop="16dp"
+                android:text="Laptop ASUS Vivobook 15 X1504ZA-NJ517W" />
+
+            <TextView
+                android:id="@+id/detail_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="#C50000"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp"
+                android:text="13.990.000đ" />
+
+            <TextView
+                android:id="@+id/detail_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textSize="16sp"
+                android:lineSpacingExtra="4dp"
+                android:maxLines="5"
+                android:ellipsize="end"
+                android:textColor="@android:color/black"
+                android:foreground="@drawable/gradient_fade"/>
+
+            <Button
+                android:id="@+id/btn_toggle_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Xem thêm ▼"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="#717171"
+                android:textColor="@android:color/white"/>
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Thanh Toolbar ở dưới, cố định -->
+    <LinearLayout
+        android:id="@+id/bottom_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:elevation="8dp"
+        android:padding="8dp">
+
+        <Button
+            android:id="@+id/btn_add_to_cart"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="🛒 Thêm vào giỏ hàng"
+            android:backgroundTint="#757575"
+            android:textColor="@android:color/white"/>
+
+        <Button
+            android:id="@+id/btn_buy_now"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="⚡ Mua ngay"
+            android:backgroundTint="#A60000"
+            android:textColor="@android:color/white"/>
+    </LinearLayout>
+</RelativeLayout>
