@@ -9,7 +9,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="170dp"
         android:layout_height="match_parent"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="17dp"
         android:layout_marginTop="32dp"
         android:layout_marginBottom="16dp"
         android:orientation="vertical"
@@ -26,19 +26,23 @@
             android:background="#F2FFFB"
             >
 
-            <TextView
+           <TextView
                 android:id="@+id/discountBadge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/badge_rec"
-                android:textAlignment="center"
-                android:gravity="center"
-                android:text="DISCOUNTED"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="4dp"
+                android:background="@drawable/ribbon_discount"
+                android:text="DISCOUNT"
                 android:textColor="#FFFFFF"
-                android:textSize="12sp">
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:gravity="center"
+                android:layout_marginTop="6dp"
+                android:layout_marginStart="6dp"
+                android:layout_gravity="top|start"
+                android:elevation="3dp"/>
 
-            </TextView>
 
             <ImageView
                 android:id="@+id/productImg"
@@ -57,7 +61,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="10dp"
-
                 android:layout_marginEnd="5dp"
                 android:layout_marginStart="5dp"
                 android:maxLines="2"
@@ -66,69 +69,78 @@
                 android:singleLine="false"
                 android:text="AKG N700NCM2 Wireless Headphones"
                 android:textColor="#000"
-                android:textSize="11sp" />
+                android:textSize="15sp" />
 
             <LinearLayout
                 android:padding="5dp"
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
-                android:layout_height="wrap_content"
-                >
+                android:layout_height="wrap_content">
 
+                <!-- LinearLayout chứa giá tiền và giá cũ -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                <!-- Giá tiền hiện tại -->
+                <TextView
+                    android:id="@+id/productPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="13.99 triệu đ"
+                    android:layout_marginStart="3dp"
+                    android:textColor="#000"
+                    android:textSize="16sp"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif-medium" />
+
+                <!-- Giá cũ và mũi tên giảm giá -->
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
+                    android:orientation="horizontal">
 
-                    >
+                    <!-- Giá cũ -->
                     <TextView
-                        android:id="@+id/productPrice"
+                        android:id="@+id/productOldprice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="500,90 TL"
-                        android:layout_marginStart="3dp"
-                        android:textColor="#000"
-                        android:textSize="15sp" />
+                        android:layout_marginStart="4dp"
+                        android:text="15.00 triệu đ"
+                        android:textColor="#808080"
+                        android:textSize="13sp"
+                        android:textStyle="normal"
+                        android:fontFamily="sans-serif-medium" />
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        >
-
-                        <TextView
-                            android:id="@+id/productOldprice"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="4dp"
-                            android:text="600,90 TL"
-                            android:textColor="#FF0000"
-                            android:textSize="10sp" />
-                        <ImageView
-                            android:id="@+id/discountArrow"
-                            android:layout_gravity="right"
-                            android:layout_width="wrap_content"
-                            android:layout_height="20dp"
-                            android:src="@drawable/down_arrow"
-                            />
-
-                    </LinearLayout>
-
+                    <!-- Mũi tên giảm giá -->
+                    <ImageView
+                        android:id="@+id/discountArrow"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_marginStart="4dp"
+                        android:src="@drawable/down_arrow" />
                 </LinearLayout>
+            </LinearLayout>
 
-
+            <!-- Phần trăm giảm giá -->
                 <TextView
                     android:id="@+id/productDisc"
-                    android:layout_width="56dp"
-                    android:layout_height="37dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:layout_marginLeft="30dp"
-                    android:background="@drawable/discount_badge"
+                    android:layout_marginLeft="8dp"
+                    android:background="@drawable/custom_discount"
                     android:gravity="center"
                     android:text="50%"
                     android:textAlignment="center"
-                    android:textColor="#FFFF"
-                    android:textSize="15sp" />
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:padding="8dp"
+                    android:elevation="6dp"/> <!-- Hiệu ứng bóng -->
+
             </LinearLayout>
 
 

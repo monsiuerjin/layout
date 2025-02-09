@@ -40,17 +40,42 @@
                 android:layout_height="wrap_content"
                 android:textSize="24sp"
                 android:layout_marginTop="16dp"
-                android:text="Laptop ASUS Vivobook 15 X1504ZA-NJ517W" />
+                android:text="Laptop ASUS Vivobook 15 " />
 
-            <TextView
-                android:id="@+id/detail_price"
+            <!-- Giá mới và giá cũ -->
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:textColor="#C50000"
-                android:textStyle="bold"
+                android:orientation="horizontal"
                 android:layout_marginTop="8dp"
-                android:text="13.990.000đ" />
+                android:gravity="center_vertical">
+
+                <!-- Giá mới -->
+                <TextView
+                    android:id="@+id/detail_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="25sp"
+                    android:textColor="#C50000"
+                    android:textStyle="bold"
+                    android:text="13.990.000đ" />
+
+                <!-- Khoảng cách giữa giá mới và giá cũ -->
+                <TextView
+                    android:layout_width="8dp"
+                    android:layout_height="wrap_content" />
+
+                <!-- Giá cũ -->
+                <TextView
+                    android:id="@+id/detail_old_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:textColor="#757575"
+                    android:textStyle="normal"
+                    android:text="15.990.000đ"
+                    />
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/detail_description"
@@ -66,12 +91,13 @@
 
             <Button
                 android:id="@+id/btn_toggle_description"
-                android:layout_width="wrap_content"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:text="Xem thêm ▼"
                 android:layout_marginTop="8dp"
-                android:backgroundTint="#717171"
-                android:textColor="@android:color/white"/>
+                android:backgroundTint="#28852C"
+                android:textColor="@android:color/white"
+                android:layout_gravity="center_horizontal"/>
         </LinearLayout>
     </ScrollView>
 
@@ -94,6 +120,9 @@
             android:text="🛒 Thêm vào giỏ hàng"
             android:backgroundTint="#757575"
             android:textColor="@android:color/white"/>
+        <TextView
+            android:layout_width="8dp"
+            android:layout_height="wrap_content"/>
 
         <Button
             android:id="@+id/btn_buy_now"
@@ -101,7 +130,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="⚡ Mua ngay"
-            android:backgroundTint="#A60000"
+            android:backgroundTint="#B82800"
             android:textColor="@android:color/white"/>
     </LinearLayout>
 </RelativeLayout>

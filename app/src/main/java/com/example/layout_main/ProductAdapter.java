@@ -1,5 +1,6 @@
 package com.example.layout_main;
 
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +46,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             holder.productOldPrice.setText(formatPrice(product.getOldPrice()));
             holder.productOldPrice.setVisibility(View.VISIBLE);
             holder.discountBadge.setVisibility(View.VISIBLE);
+            holder.productOldPrice.setPaintFlags(holder.productOldPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
             // Tính toán phần trăm giảm giá
             int discount = (int) ((1 - (product.getPrice() / product.getOldPrice())) * 100);

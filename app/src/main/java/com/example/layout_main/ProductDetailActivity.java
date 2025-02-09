@@ -1,6 +1,7 @@
 package com.example.layout_main;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -26,6 +27,8 @@ public class ProductDetailActivity extends AppCompatActivity {
         btnBack.setOnClickListener(v -> {
             finish(); // Đóng Activity hiện tại, quay về Activity trước đó
         });
+        TextView oldPrice = findViewById(R.id.detail_old_price);
+        oldPrice.setPaintFlags(oldPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
         // Nội dung mô tả
         String details = "\uD83D\uDD39 Processor & Graphics\n"
@@ -50,7 +53,7 @@ public class ProductDetailActivity extends AppCompatActivity {
 
         // Hiển thị nội dung rút gọn ban đầu
         description.setText(details);
-        description.setMaxLines(3);
+        description.setMaxLines(5);
         description.setEllipsize(android.text.TextUtils.TruncateAt.END);
 
         // Xử lý mở rộng / thu gọn nội dung mô tả

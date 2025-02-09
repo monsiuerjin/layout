@@ -1,8 +1,10 @@
 package com.example.layout_main;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -24,10 +26,10 @@ public class MainActivity extends AppCompatActivity implements ProductAdapter.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Khởi tạo danh sách sản phẩm (10 sản phẩm)
+        // Khởi tạo danh sách sản phẩm (8 sản phẩm)
         List<Product> products = new ArrayList<>();
         products.add(new Product("Laptop ASUS Vivobook 15", 13990000.0, 15000000.0, R.drawable.vivobook));
-        products.add(new Product("MacBook Pro 14 M4", 37990000.0, 39990000.0, R.drawable.macbook_pro_m4));
+        products.add(new Product("AKG N700NCM2 Wireless Headphones", 3790000.0, 3990000.0, R.drawable.product_image));
         products.add(new Product("iPad Air 6 M2", 13990000.0, 14990000.0, R.drawable.ipab_air_6_m2));
         products.add(new Product("Apple Watch Series 9", 6999000.0, 7990000.0, R.drawable.apple_watch_sr9));
         products.add(new Product("AirPods Pro 2", 5590000.0, 6190000.0, R.drawable.airpod_pro_2));
@@ -43,6 +45,8 @@ public class MainActivity extends AppCompatActivity implements ProductAdapter.On
         recyclerView.setHasFixedSize(true); // Tối ưu hiệu suất
         adapter = new ProductAdapter(products, this);
         recyclerView.setAdapter(adapter);
+
+
     }
 
 //    public void ProductViewHolder(View itemView) {
