@@ -1,11 +1,14 @@
 package com.example.layout_main;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -71,6 +74,21 @@ public class ProductDetailActivity extends AppCompatActivity {
             }
             isExpanded[0] = !isExpanded[0];
         });
+        // Tìm RatingBar
+        RatingBar ratingBar = findViewById(R.id.detail_rating_bar);
+
+        // Cách đổi màu từng sao mà không ảnh hưởng đến sao chưa chọn
+        ratingBar.setOnRatingBarChangeListener((ratingBar1, rating, fromUser) -> {
+            if (rating >= 4) {
+                ratingBar1.getProgressDrawable().setColorFilter(Color.parseColor("#FFD700"), PorterDuff.Mode.SRC_ATOP);
+            } else {
+                ratingBar1.getProgressDrawable().setColorFilter(Color.parseColor("#757575"), PorterDuff.Mode.SRC_ATOP);
+            }
+        });
+
+        // Đặt giá trị ban đầu là 4 sao và đổi màu
+        ratingBar.setRating(4);
+        ratingBar.getProgressDrawable().setColorFilter(Color.parseColor("#FFD700"), PorterDuff.Mode.SRC_ATOP);
 
         // Xử lý sự kiện khi bấm nút
         btnAddToCart.setOnClickListener(v ->

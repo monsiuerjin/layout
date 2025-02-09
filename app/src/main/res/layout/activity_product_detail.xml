@@ -18,8 +18,8 @@
             <!-- Nút Back -->
             <ImageView
                 android:id="@+id/btn_back"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginStart="8dp"
                 android:src="@drawable/ic_back"
@@ -50,7 +50,6 @@
                 android:layout_marginTop="8dp"
                 android:gravity="center_vertical">
 
-                <!-- Giá mới -->
                 <TextView
                     android:id="@+id/detail_price"
                     android:layout_width="wrap_content"
@@ -60,12 +59,10 @@
                     android:textStyle="bold"
                     android:text="13.990.000đ" />
 
-                <!-- Khoảng cách giữa giá mới và giá cũ -->
                 <TextView
                     android:layout_width="8dp"
                     android:layout_height="wrap_content" />
 
-                <!-- Giá cũ -->
                 <TextView
                     android:id="@+id/detail_old_price"
                     android:layout_width="wrap_content"
@@ -73,8 +70,7 @@
                     android:textSize="20sp"
                     android:textColor="#757575"
                     android:textStyle="normal"
-                    android:text="15.990.000đ"
-                    />
+                    android:text="15.990.000đ" />
             </LinearLayout>
 
             <TextView
@@ -98,9 +94,87 @@
                 android:backgroundTint="#28852C"
                 android:textColor="@android:color/white"
                 android:layout_gravity="center_horizontal"/>
+
+            <!-- Phần đánh giá sản phẩm -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:text="Đánh giá sản phẩm" />
+
+            <RatingBar
+                android:id="@+id/detail_rating_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numStars="5"
+                android:stepSize="1"
+                android:rating="5"
+                android:isIndicator="true"/>
+
+
+            <TextView
+                android:id="@+id/detail_total_reviews"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:text="(3 đánh giá)"
+                android:textSize="14sp"
+                android:textColor="#757575" />
+
+            <LinearLayout
+                android:id="@+id/review_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="12dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/gradient_review"
+                    android:padding="12dp"
+                    android:layout_marginBottom="8dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Nguyễn Văn A: Sản phẩm rất tốt, pin lâu, hiệu năng ổn định!"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/gradient_review"
+                    android:padding="12dp"
+                    android:layout_marginBottom="8dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Lê Thị B: Màn hình đẹp, bàn phím gõ êm. Rất hài lòng!"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/gradient_review"
+                    android:padding="12dp"
+                    android:layout_marginBottom="8dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Trần C: Giao hàng nhanh, đóng gói cẩn thận. Laptop chạy mượt."
+                        android:textSize="16sp" />
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
-
     <!-- Thanh Toolbar ở dưới, cố định -->
     <LinearLayout
         android:id="@+id/bottom_toolbar"
