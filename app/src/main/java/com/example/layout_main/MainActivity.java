@@ -4,7 +4,11 @@ import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.ViewFlipper;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -20,11 +24,18 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements ProductAdapter.OnItemClickListener {
     private RecyclerView recyclerView;
     private ProductAdapter adapter;
+    private ViewFlipper viewFlipper;//mới thêm
+    private ImageButton btnPrev, btnNext;
+
+    private TextView txtQuangCao; // Text "QUẢNG CÁO"
+    private int[] images = {R.drawable.banner1, R.drawable.banner2, R.drawable.banner3};//mới thêm
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
 
         // Khởi tạo danh sách sản phẩm (8 sản phẩm)
         List<Product> products = new ArrayList<>();
@@ -46,6 +57,24 @@ public class MainActivity extends AppCompatActivity implements ProductAdapter.On
         adapter = new ProductAdapter(products, this);
         recyclerView.setAdapter(adapter);
 
+        viewFlipper = findViewById(R.id.viewFlipper);
+        for (int image : images){
+            addImageToFlipper(image);
+        }
+        // Áp dụng hiệu ứng chuyển đổi
+        viewFlipper.setInAnimation(this, R.anim.slide_in_right);
+        viewFlipper.setOutAnimation(this, R.anim.slide_out_left);
+        viewFlipper.setFlipInterval(4000); // Chuyển banner mỗi 4 giây
+        viewFlipper.startFlipping();
+
+        btnPrev = findViewById(R.id.btnPrev);
+        btnNext = findViewById(R.id.btnNext);
+
+        // Xử lý sự kiện bấm nút "Trước"
+        btnPrev.setOnClickListener(v -> viewFlipper.showPrevious());
+
+        // Xử lý sự kiện bấm nút "Tiếp theo"
+        btnNext.setOnClickListener(v -> viewFlipper.showNext());
 
     }
 
@@ -60,6 +89,12 @@ public class MainActivity extends AppCompatActivity implements ProductAdapter.On
 //        itemView.setOnClickListener(this);
 //
 //    }
+private void addImageToFlipper(int image) {
+    ImageView imageView = new ImageView(this);
+    imageView.setImageResource(image);
+    imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+    viewFlipper.addView(imageView);
+}
 
 
     // Xử lý khi nhấp vào sản phẩm
