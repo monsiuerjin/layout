@@ -64,17 +64,28 @@ public class MainActivity extends AppCompatActivity implements ProductAdapter.On
         // Áp dụng hiệu ứng chuyển đổi
         viewFlipper.setInAnimation(this, R.anim.slide_in_right);
         viewFlipper.setOutAnimation(this, R.anim.slide_out_left);
-        viewFlipper.setFlipInterval(4000); // Chuyển banner mỗi 4 giây
+        viewFlipper.setFlipInterval(10000); // Chuyển banner mỗi 4 giây
         viewFlipper.startFlipping();
 
         btnPrev = findViewById(R.id.btnPrev);
         btnNext = findViewById(R.id.btnNext);
 
-        // Xử lý sự kiện bấm nút "Trước"
-        btnPrev.setOnClickListener(v -> viewFlipper.showPrevious());
+        btnPrev.setOnClickListener(v -> {
+            if (viewFlipper != null) {
+                viewFlipper.stopFlipping();
+                viewFlipper.showPrevious();
+                viewFlipper.startFlipping();
+            }
+        });
 
-        // Xử lý sự kiện bấm nút "Tiếp theo"
-        btnNext.setOnClickListener(v -> viewFlipper.showNext());
+        btnNext.setOnClickListener(v -> {
+            if (viewFlipper != null) {
+                viewFlipper.stopFlipping();
+                viewFlipper.showNext();
+                viewFlipper.startFlipping();
+            }
+        });
+
 
     }
 
