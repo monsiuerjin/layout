@@ -1,5 +1,7 @@
 package com.example.layout_main;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,14 +15,16 @@ import java.util.List;
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
     private List<Product> productList;
     private OnItemClickListener listener;
+    private Context context;
 
     public interface OnItemClickListener {
         void onItemClick(Product product);
     }
 
-    public ProductAdapter(List<Product> products, OnItemClickListener listener) {
+    public ProductAdapter(Context context, List<Product> products) {
         this.productList = products;
-        this.listener = listener;
+        this.context = context;
+        //this.listener = listener;
     }
 
     @NonNull
@@ -57,7 +61,15 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         }
 
         // Xử lý sự kiện nhấp vào item
-        holder.itemView.setOnClickListener(v -> listener.onItemClick(product));
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, ProductDetailActivity.class);
+            intent.putExtra("name", product.getName());
+            intent.putExtra("price", product.getPrice());
+            intent.putExtra("oldPrice", product.getOldPrice());
+            intent.putExtra("description", product.getDescription());
+            intent.putExtra("imageResourceId", product.getImageResourceId());
+            context.startActivity(intent);
+        });
     }
 
     @Override

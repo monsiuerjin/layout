@@ -14,6 +14,13 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class ProductDetailActivity extends AppCompatActivity {
+    ImageView productImage;
+    TextView productName;
+    TextView productPrice;
+    TextView productOldPrice;
+    TextView productDesc;
+
+    @SuppressWarnings("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,38 +33,59 @@ public class ProductDetailActivity extends AppCompatActivity {
         Button btnAddToCart = findViewById(R.id.btn_add_to_cart);
         Button btnBuyNow = findViewById(R.id.btn_buy_now);
 
+        productImage = findViewById(R.id.detail_image);
+        productName = findViewById(R.id.detail_name);
+        productPrice = findViewById(R.id.detail_price);
+        productOldPrice = findViewById(R.id.detail_old_price);
+
+        productDesc = findViewById(R.id.detail_description);
+
+        Intent intent = getIntent();
+        String name = intent.getStringExtra("name");
+        double price = intent.getDoubleExtra("price", 0.0);
+        double oldPrice = intent.getDoubleExtra("oldPrice", 0.0);
+        String details = intent.getStringExtra("description");
+        int imageResourceId = intent.getIntExtra("imageResourceId", 0);
+
+
         // Xử lý sự kiện nút Back
         btnBack.setOnClickListener(v -> {
             finish(); // Đóng Activity hiện tại, quay về Activity trước đó
         });
-        TextView oldPrice = findViewById(R.id.detail_old_price);
-        oldPrice.setPaintFlags(oldPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        //TextView oldPrice = findViewById(R.id.detail_old_price);
+        //oldPrice.setPaintFlags(oldPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
         // Nội dung mô tả
-        String details = "\uD83D\uDD39 Processor & Graphics\n"
-                + "Graphics Card: Intel Iris Xe Graphics\n"
-                + "CPU: Intel Core i5-1235U (1.3 GHz, 12M Cache, up to 4.4 GHz, 10 cores)\n\n"
-                + "\uD83D\uDD39 Memory & Storage\n"
-                + "RAM: 16GB DDR4 (8GB DDR4 Onboard + 8GB DDR4 SO-DIMM)\n"
-                + "Storage: 512GB M.2 NVMe PCIe 3.0 SSD\n\n"
-                + "\uD83D\uDD39 Display\n"
-                + "Size: 15.6 inches\n"
-                + "Resolution: 1920 x 1080 pixels (Full HD)\n"
-                + "Refresh Rate: 60 Hz\n"
-                + "Brightness: 250 nits\n"
-                + "Color Coverage: 45% NTSC\n"
-                + "Features: Anti-glare, TÜV Rheinland-certified\n\n"
-                + "\uD83D\uDD39 Audio\n"
-                + "Technology: SonicMaster\n"
-                + "Built-in: Speakers & Array Microphone\n\n"
-                + "\uD83D\uDD39 Connectivity\n"
-                + "Wi-Fi: Wi-Fi 6E (802.11ax) (Dual band) 1×1\n"
-                + "Bluetooth: Bluetooth 5.3\n";
+//        String details = "\uD83D\uDD39 Processor & Graphics\n"
+//                + "Graphics Card: Intel Iris Xe Graphics\n"
+//                + "CPU: Intel Core i5-1235U (1.3 GHz, 12M Cache, up to 4.4 GHz, 10 cores)\n\n"
+//                + "\uD83D\uDD39 Memory & Storage\n"
+//                + "RAM: 16GB DDR4 (8GB DDR4 Onboard + 8GB DDR4 SO-DIMM)\n"
+//                + "Storage: 512GB M.2 NVMe PCIe 3.0 SSD\n\n"
+//                + "\uD83D\uDD39 Display\n"
+//                + "Size: 15.6 inches\n"
+//                + "Resolution: 1920 x 1080 pixels (Full HD)\n"
+//                + "Refresh Rate: 60 Hz\n"
+//                + "Brightness: 250 nits\n"
+//                + "Color Coverage: 45% NTSC\n"
+//                + "Features: Anti-glare, TÜV Rheinland-certified\n\n"
+//                + "\uD83D\uDD39 Audio\n"
+//                + "Technology: SonicMaster\n"
+//                + "Built-in: Speakers & Array Microphone\n\n"
+//                + "\uD83D\uDD39 Connectivity\n"
+//                + "Wi-Fi: Wi-Fi 6E (802.11ax) (Dual band) 1×1\n"
+//                + "Bluetooth: Bluetooth 5.3\n";
 
         // Hiển thị nội dung rút gọn ban đầu
-        description.setText(details);
-        description.setMaxLines(5);
-        description.setEllipsize(android.text.TextUtils.TruncateAt.END);
+        productName.setText(name);
+        productPrice.setText(String.format("%.0f ₫", price));
+        productOldPrice.setText(String.format("%.0f ₫", oldPrice));
+        productOldPrice.setPaintFlags(productOldPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        productDesc.setText(details);
+        productImage.setImageResource(imageResourceId);
+        //description.setText(details);
+        productDesc.setMaxLines(5);
+        productDesc.setEllipsize(android.text.TextUtils.TruncateAt.END);
 
         // Xử lý mở rộng / thu gọn nội dung mô tả
         boolean[] isExpanded = {false};
