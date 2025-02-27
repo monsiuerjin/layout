@@ -78,8 +78,10 @@ public class ProductDetailActivity extends AppCompatActivity {
 
         // Hiển thị nội dung rút gọn ban đầu
         productName.setText(name);
-        productPrice.setText(String.format("%.0f ₫", price));
-        productOldPrice.setText(String.format("%.0f ₫", oldPrice));
+//        productPrice.setText(String.format("%.0f ₫", price));
+//        productOldPrice.setText(String.format("%.0f ₫", oldPrice));
+        productPrice.setText(formatPrice(price));
+        productOldPrice.setText(formatPrice(oldPrice));
         productOldPrice.setPaintFlags(productOldPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         productDesc.setText(details);
         productImage.setImageResource(imageResourceId);
@@ -126,5 +128,8 @@ public class ProductDetailActivity extends AppCompatActivity {
         btnBuyNow.setOnClickListener(v ->
                 Toast.makeText(ProductDetailActivity.this, "Chuyển đến trang thanh toán!", Toast.LENGTH_SHORT).show()
         );
+    }
+    private String formatPrice(double price) {
+            return String.format("%,.0f ₫", price);
     }
 }
