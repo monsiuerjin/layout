@@ -82,8 +82,9 @@ public class MainActivity extends AppCompatActivity implements ProductAdapter.On
             addImageToFlipper(image);
         }
         // Áp dụng hiệu ứng chuyển đổi
-        viewFlipper.setInAnimation(this, R.anim.slide_in_right);
-        viewFlipper.setOutAnimation(this, R.anim.slide_out_left);
+//        viewFlipper.setInAnimation(this, R.anim.slide_in_right);
+//        viewFlipper.setOutAnimation(this, R.anim.slide_out_left);
+
         viewFlipper.setFlipInterval(10000); // Chuyển banner mỗi 10 giây
         viewFlipper.startFlipping();
 
@@ -92,6 +93,8 @@ public class MainActivity extends AppCompatActivity implements ProductAdapter.On
 
         btnPrev.setOnClickListener(v -> {
             if (viewFlipper != null) {
+                viewFlipper.setInAnimation(this, R.anim.slide_in_left);
+                viewFlipper.setOutAnimation(this, R.anim.slide_out_right);
                 viewFlipper.stopFlipping();
                 viewFlipper.showPrevious();
                 viewFlipper.startFlipping();
@@ -100,6 +103,8 @@ public class MainActivity extends AppCompatActivity implements ProductAdapter.On
 
         btnNext.setOnClickListener(v -> {
             if (viewFlipper != null) {
+                viewFlipper.setInAnimation(this, R.anim.slide_in_right);
+                viewFlipper.setOutAnimation(this, R.anim.slide_out_left);
                 viewFlipper.stopFlipping();
                 viewFlipper.showNext();
                 viewFlipper.startFlipping();
