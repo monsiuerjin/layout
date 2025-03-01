@@ -100,4 +100,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             return String.format("%,.0f ₫", price);
         }
     }
+    // tìm kiếm
+    public void updateList(List<Product> newList) {
+        productList.clear();
+        productList.addAll(newList);
+        notifyDataSetChanged();
+    }
 }

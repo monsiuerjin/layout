@@ -16,23 +16,34 @@
             android:orientation="vertical">
 
             <!-- Nút Back -->
-            <ImageView
-                android:id="@+id/btn_back"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginStart="8dp"
-                android:src="@drawable/ic_back"
-                android:padding="8dp"/>
+            <!-- Bọc ảnh và nút Back chung trong RelativeLayout -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <!-- Ảnh sản phẩm -->
-            <ImageView
-                android:id="@+id/detail_image"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="8dp"
-                android:src="@drawable/vivobook" />
+                <!-- Ảnh sản phẩm -->
+                <ImageView
+                    android:id="@+id/detail_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:scaleType="fitCenter"
+                    android:adjustViewBounds="true"
+                    android:background="@drawable/custom_image_background"
+                    android:src="@drawable/vivobook"/>
+
+                <!-- Nút Back (đè lên ảnh) -->
+                <ImageView
+                    android:id="@+id/btn_back"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="16dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:src="@drawable/ic_back"
+                    android:padding="8dp"
+                    android:background="@drawable/rounded_button_bg"/>
+            </RelativeLayout>
+
 
             <TextView
                 android:id="@+id/detail_name"

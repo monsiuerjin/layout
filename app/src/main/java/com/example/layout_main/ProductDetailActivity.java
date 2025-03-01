@@ -19,6 +19,8 @@ public class ProductDetailActivity extends AppCompatActivity {
     TextView productPrice;
     TextView productOldPrice;
     TextView productDesc;
+    TextView detailName, detailPrice;
+
 
     @SuppressWarnings("MissingInflatedId")
     @Override
@@ -32,6 +34,8 @@ public class ProductDetailActivity extends AppCompatActivity {
         Button btnToggle = findViewById(R.id.btn_toggle_description);
         Button btnAddToCart = findViewById(R.id.btn_add_to_cart);
         Button btnBuyNow = findViewById(R.id.btn_buy_now);
+        detailName = findViewById(R.id.detail_name);
+        detailPrice = findViewById(R.id.detail_price);
 
         productImage = findViewById(R.id.detail_image);
         productName = findViewById(R.id.detail_name);
@@ -121,9 +125,39 @@ public class ProductDetailActivity extends AppCompatActivity {
         ratingBar.getProgressDrawable().setColorFilter(Color.parseColor("#FFD700"), PorterDuff.Mode.SRC_ATOP);
 
         // Xử lý sự kiện khi bấm nút
-        btnAddToCart.setOnClickListener(v ->
-                Toast.makeText(ProductDetailActivity.this, "Đã thêm vào giỏ hàng!", Toast.LENGTH_SHORT).show()
-        );
+        btnAddToCart.setOnClickListener(v -> {
+            try {
+                // Lấy tên sản phẩm
+                final String finalName = detailName.getText().toString().trim();
+
+                // Lấy giá sản phẩm và loại bỏ ký tự ₫, dấu phẩy
+                String priceText = detailPrice.getText().toString().replace("₫", "").replace(",", "").trim();
+
+                // Lấy ảnh sản phẩm từ Intent
+                final int imageResId = getIntent().getIntExtra("imageResourceId", 0);
+
+                // Kiểm tra nếu giá trống
+                if (priceText.isEmpty()) {
+                    Toast.makeText(ProductDetailActivity.this, "Lỗi: Giá sản phẩm không hợp lệ!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // Chuyển đổi giá trị sang số
+                final double finalPrice = Double.parseDouble(priceText);
+
+                // Tạo sản phẩm với Tên, Giá, Ảnh
+                Product product = new Product(finalName, finalPrice, 0, "", imageResId);
+
+                // Thêm vào giỏ hàng
+                CartManager.addToCart(product);
+
+                // Hiển thị thông báo
+                Toast.makeText(ProductDetailActivity.this, "Đã thêm vào giỏ hàng!", Toast.LENGTH_SHORT).show();
+            } catch (NumberFormatException e) {
+                Toast.makeText(ProductDetailActivity.this, "Lỗi: Định dạng giá không hợp lệ!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
 
         btnBuyNow.setOnClickListener(v ->
                 Toast.makeText(ProductDetailActivity.this, "Chuyển đến trang thanh toán!", Toast.LENGTH_SHORT).show()

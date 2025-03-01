@@ -32,18 +32,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <!-- Tiêu đề "QUẢNG CÁO" -->
-                <TextView
-                    android:id="@+id/bannerText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="QUẢNG CÁO"
-                    android:textColor="@android:color/black"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:gravity="center"
-                    android:padding="8dp"/>
-
                 <!-- Banner Layout -->
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/bannerLayout"

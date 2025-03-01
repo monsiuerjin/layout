@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import androidx.appcompat.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
@@ -31,6 +32,11 @@ public class MainActivity extends AppCompatActivity implements ProductAdapter.On
 
     private TextView txtQuangCao; // Text "QUẢNG CÁO"
     private int[] images = {R.drawable.banner1, R.drawable.banner2, R.drawable.banner3};//mới thêm
+
+    private List<Product> originalProductList;
+
+    private androidx.appcompat.widget.SearchView searchView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements ProductAdapter.On
         products.add(new Product("Tivi Xiaomi A Pro 4K", 11790000.0, 14990000.0, "Test mo ta 7",R.drawable.tv_xiaomi));
         products.add(new Product("Magic Keyboard", 3499000.0, 4990000.0, "Test mo ta 8",R.drawable.magic_key));
 // Không giảm giá
-
+        originalProductList = new ArrayList<>(products);
 
 //         Setup RecyclerView
         recyclerView = findViewById(R.id.recycler_view);
@@ -112,6 +118,38 @@ public class MainActivity extends AppCompatActivity implements ProductAdapter.On
         });
 
 
+        // tìm kiếm
+        // dùng cái này private androidx.appcompat.widget.SearchView searchView;
+        // không dùng cái này private SearchView searchView;
+        searchView = findViewById(R.id.search_bar);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                filterProducts(query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterProducts(newText);
+                return true;
+            }
+        });
+
+        findViewById(R.id.btn_cart).setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, CartActivity.class);
+            startActivity(intent);
+        });
+
+    }
+    private void filterProducts(String query) {
+        List<Product> filteredList = new ArrayList<>();
+        for (Product product : originalProductList) {
+            if (product.getName().toLowerCase().contains(query.toLowerCase())) {
+                filteredList.add(product);
+            }
+        }
+        adapter.updateList(filteredList);
     }
 
 //    public void ProductViewHolder(View itemView) {

@@ -21,6 +21,13 @@ public class Product implements Parcelable {
         this.description = description;
         this.imageResourceId = imageResourceId;
     }
+    public Product(String name, double price) {
+        this.name = name;
+        this.price = price;
+        this.oldPrice = 0; // Mặc định là 0
+        this.description = ""; // Chuỗi rỗng nếu không có mô tả
+        this.imageResourceId = 0; // Mặc định không có ảnh
+    }
 
     protected Product(Parcel in) {
         name = in.readString();
