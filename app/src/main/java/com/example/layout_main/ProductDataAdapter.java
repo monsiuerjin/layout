@@ -11,7 +11,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class ProductDataAdapter extends RecyclerView.Adapter<ProductDataAdapter.ProductViewHolder> {
     ArrayList<Product> lstProduct;
@@ -39,14 +41,17 @@ public class ProductDataAdapter extends RecyclerView.Adapter<ProductDataAdapter.
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
         Product item = lstProduct.get(position);
 
+        // Định dạng giá tiền
+        NumberFormat formatter = NumberFormat.getInstance(new Locale("vi", "VN"));
+
         holder.tvName.setText(item.getName());
-        holder.tvPrice.setText(item.getPrice() + " VNĐ");
+        holder.tvPrice.setText(formatter.format(item.getPrice()) + " VNĐ");
         holder.tvDescription.setText(item.getDescription());
 
         // Xử lý hiển thị giá cũ (gạch ngang nếu có)
         if (item.getOldPrice() > 0) {
             holder.tvOldPrice.setVisibility(View.VISIBLE);
-            holder.tvOldPrice.setText(item.getOldPrice() + " VNĐ");
+            holder.tvOldPrice.setText(formatter.format(item.getOldPrice()) + " VNĐ");
             holder.tvOldPrice.setPaintFlags(holder.tvOldPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         } else {
             holder.tvOldPrice.setVisibility(View.GONE);
@@ -59,6 +64,7 @@ public class ProductDataAdapter extends RecyclerView.Adapter<ProductDataAdapter.
         holder.imDelete.setOnClickListener(view -> productCallback.onItemDeleteClicked(item, position));
         holder.imEdit.setOnClickListener(view -> productCallback.onItemEditClicked(item, position));
     }
+
 
     @Override
     public int getItemCount() {

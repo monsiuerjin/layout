@@ -30,7 +30,7 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.OnQua
 
         // Danh sách giỏ hàng
         cartItems = new ArrayList<>();
-        for (Product product : CartManager.getCartItems()) {
+        for (CartItem product : CartManager.getCartItems()) {
             cartItems.add(new CartItem(
                     product.getName(),
                     (int) product.getPrice(), // Chuyển sang int để tính toán chính xác

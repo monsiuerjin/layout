@@ -1,6 +1,7 @@
 package com.example.layout_main;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
@@ -16,12 +17,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.DecimalFormat;
+import java.util.Collections;
 import java.util.List;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     private List<CartItem> cartItems;
     private Context context;
     private OnQuantityChangeListener quantityChangeListener;
+    private SharedPreferences sharedPreferences;
+    private static final String CART_PREFS = "cart_prefs";
+    private static final String CART_KEY = "cart_items";
 
     public interface OnQuantityChangeListener {
         void onQuantityChanged();
@@ -31,6 +36,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         this.context = context;
         this.cartItems = cartItems;
         this.quantityChangeListener = listener;
+        this.sharedPreferences = context.getSharedPreferences(CART_PREFS, Context.MODE_PRIVATE);
+        loadCartFromPrefs();
     }
 
     @NonNull
@@ -44,36 +51,33 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         CartItem item = cartItems.get(position);
 
-        // Hiển thị dữ liệu sản phẩm
         holder.name.setText(item.getName());
         holder.price.setText(formatCurrency(item.getPrice() * item.getQuantity()));
         holder.quantity.setText(String.valueOf(item.getQuantity()));
-
-        // Load ảnh từ assets/image/
         loadImageFromAssets(holder.image, item.getImagePath());
 
-        // Xử lý nút giảm số lượng
         holder.btnDecrease.setOnClickListener(v -> {
             if (item.getQuantity() > 1) {
                 item.setQuantity(item.getQuantity() - 1);
                 notifyItemChanged(position);
                 quantityChangeListener.onQuantityChanged();
+                saveCartToPrefs();
             }
         });
 
-        // Xử lý nút tăng số lượng
         holder.btnIncrease.setOnClickListener(v -> {
             item.setQuantity(item.getQuantity() + 1);
             notifyItemChanged(position);
             quantityChangeListener.onQuantityChanged();
+            saveCartToPrefs();
         });
 
-        // Xử lý nút xóa sản phẩm
         holder.btnRemove.setOnClickListener(v -> {
             cartItems.remove(position);
             notifyItemRemoved(position);
             notifyItemRangeChanged(position, cartItems.size());
             quantityChangeListener.onQuantityChanged();
+            saveCartToPrefs();
         });
     }
 
@@ -99,22 +103,36 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         }
     }
 
-    // Hàm load ảnh từ assets/image/
     private void loadImageFromAssets(ImageView imageView, String imagePath) {
         try {
-            InputStream inputStream = context.getAssets().open("image/" + imagePath); // Đọc ảnh từ assets/image/
+            InputStream inputStream = context.getAssets().open("image/" + imagePath);
             Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
             imageView.setImageBitmap(bitmap);
             inputStream.close();
         } catch (IOException e) {
             e.printStackTrace();
-            imageView.setImageResource(R.drawable.ic_launcher_background); // Ảnh mặc định nếu lỗi
+            imageView.setImageResource(R.drawable.ic_launcher_background);
         }
     }
 
-    // Định dạng tiền tệ
     private String formatCurrency(int amount) {
         DecimalFormat formatter = new DecimalFormat("#,###,###đ");
         return formatter.format(amount);
+    }
+
+    private void saveCartToPrefs() {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(CART_KEY, CartManager.serializeCart(cartItems));
+        editor.apply();
+    }
+
+    private void loadCartFromPrefs() {
+        String savedCart = sharedPreferences.getString(CART_KEY, "");
+        if (!savedCart.isEmpty()) {
+            cartItems.clear();
+            cartItems.addAll(CartManager.deserializeCart(savedCart));
+            Collections.reverse(cartItems); // Sản phẩm mới thêm hiển thị trước
+            notifyDataSetChanged();
+        }
     }
 }

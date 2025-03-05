@@ -97,24 +97,24 @@ public class ProductDetailActivity extends AppCompatActivity {
         ratingBar.setRating(4);
         ratingBar.getProgressDrawable().setColorFilter(Color.parseColor("#FFD700"), PorterDuff.Mode.SRC_ATOP);
 
-        // Xử lý sự kiện thêm vào giỏ hàng
         btnAddToCart.setOnClickListener(v -> {
             try {
-                final String finalName = detailName.getText().toString().trim();
-                String priceText = detailPrice.getText().toString().replace("₫", "").replace(",", "").trim();
+                // Lấy tên và giá sản phẩm từ giao diện
+                String productNameText = detailName.getText().toString().trim();
+                String productPriceText = detailPrice.getText().toString().replace("₫", "").replace(",", "").trim(); // Đổi tên biến để tránh trùng
 
-                if (priceText.isEmpty()) {
+                if (productPriceText.isEmpty()) {
                     Toast.makeText(ProductDetailActivity.this, "Lỗi: Giá sản phẩm không hợp lệ!", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                final double finalPrice = Double.parseDouble(priceText);
+                double productPrice = Double.parseDouble(productPriceText);
 
-                // Tạo sản phẩm mới
-                Product product = new Product(0, finalName, finalPrice, oldPrice, details, imagePath);
+                // Tạo đối tượng CartItem
+                CartItem cartItem = new CartItem(productNameText,(int) productPrice, imagePath, 1);
 
                 // Thêm vào giỏ hàng
-                CartManager.addToCart(product);
+                CartManager.addToCart(ProductDetailActivity.this, cartItem);
 
                 Toast.makeText(ProductDetailActivity.this, "Đã thêm vào giỏ hàng!", Toast.LENGTH_SHORT).show();
             } catch (NumberFormatException e) {
