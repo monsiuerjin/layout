@@ -4,37 +4,56 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Product implements Parcelable {
+    private int id;
     private String name;
     private double price;
     private double oldPrice;
     private String description;
-    private int imageResourceId;
+    private String imagePath; // Đổi imageResourceId thành imagePath (String)
 
-    // Constructor mặc định (nếu cần)
     public Product() {
     }
 
-    public Product(String name, double price, double oldPrice,String description ,int imageResourceId) {
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public void setOldPrice(double oldPrice) {
+        this.oldPrice = oldPrice;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    public Product(int id, String name, double price, double oldPrice, String description, String imagePath) {
+        this.id = id;
         this.name = name;
         this.price = price;
         this.oldPrice = oldPrice;
         this.description = description;
-        this.imageResourceId = imageResourceId;
-    }
-    public Product(String name, double price) {
-        this.name = name;
-        this.price = price;
-        this.oldPrice = 0; // Mặc định là 0
-        this.description = ""; // Chuỗi rỗng nếu không có mô tả
-        this.imageResourceId = 0; // Mặc định không có ảnh
+        this.imagePath = imagePath;
     }
 
     protected Product(Parcel in) {
+        id = in.readInt();
         name = in.readString();
         price = in.readDouble();
         oldPrice = in.readDouble();
         description = in.readString();
-        imageResourceId = in.readInt();
+        imagePath = in.readString();
     }
 
     public static final Creator<Product> CREATOR = new Creator<Product>() {
@@ -51,16 +70,21 @@ public class Product implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
         dest.writeString(name);
         dest.writeDouble(price);
         dest.writeDouble(oldPrice);
         dest.writeString(description);
-        dest.writeInt(imageResourceId);
+        dest.writeString(imagePath);
     }
 
     @Override
     public int describeContents() {
         return 0;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getName() {
@@ -75,10 +99,11 @@ public class Product implements Parcelable {
         return oldPrice;
     }
 
-    public int getImageResourceId() {
-        return imageResourceId;
-    }
     public String getDescription() {
         return description;
+    }
+
+    public String getImagePath() {
+        return imagePath;
     }
 }

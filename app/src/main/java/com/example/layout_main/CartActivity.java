@@ -33,9 +33,9 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.OnQua
         for (Product product : CartManager.getCartItems()) {
             cartItems.add(new CartItem(
                     product.getName(),
-                    (int) product.getPrice(), // Đổi sang kiểu int để tính toán chính xác
-                    product.getImageResourceId(),
-                    1 // Số lượng mặc định là 1
+                    (int) product.getPrice(), // Chuyển sang int để tính toán chính xác
+                    product.getImagePath(),  // Sử dụng imagePath (String)
+                    1 // Mặc định số lượng là 1
             ));
         }
 
@@ -43,14 +43,14 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.OnQua
         RecyclerView recyclerView = findViewById(R.id.recycler_cart);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        // Khởi tạo adapter và gán listener để cập nhật tổng giá
+        // Khởi tạo adapter với danh sách sản phẩm
         cartAdapter = new CartAdapter(this, cartItems, this);
         recyclerView.setAdapter(cartAdapter);
 
-        // Tính tổng giá ban đầu
+        // Cập nhật tổng tiền ban đầu
         updateTotalPrice();
 
-        // Nút Back để quay lại màn hình trước
+        // Xử lý nút Back để quay lại màn hình trước
         ImageView btnBack = findViewById(R.id.btn_back_cart);
         btnBack.setOnClickListener(v -> finish());
     }
@@ -61,7 +61,7 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.OnQua
         updateTotalPrice();
     }
 
-    // Hàm tính tổng giá
+    // Tính tổng giá của giỏ hàng
     private void updateTotalPrice() {
         int total = 0;
         for (CartItem item : cartItems) {

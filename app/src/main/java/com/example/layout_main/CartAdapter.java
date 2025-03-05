@@ -1,6 +1,8 @@
 package com.example.layout_main;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.DecimalFormat;
 import java.util.List;
 
@@ -19,7 +23,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     private Context context;
     private OnQuantityChangeListener quantityChangeListener;
 
-    // Interface để cập nhật tổng giá trị giỏ hàng khi số lượng thay đổi
     public interface OnQuantityChangeListener {
         void onQuantityChanged();
     }
@@ -43,16 +46,18 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
         // Hiển thị dữ liệu sản phẩm
         holder.name.setText(item.getName());
-        holder.price.setText(formatCurrency(item.getPrice() * item.getQuantity())); // Tính tổng giá
-        holder.image.setImageResource(item.getImageResourceId());
+        holder.price.setText(formatCurrency(item.getPrice() * item.getQuantity()));
         holder.quantity.setText(String.valueOf(item.getQuantity()));
+
+        // Load ảnh từ assets/image/
+        loadImageFromAssets(holder.image, item.getImagePath());
 
         // Xử lý nút giảm số lượng
         holder.btnDecrease.setOnClickListener(v -> {
             if (item.getQuantity() > 1) {
                 item.setQuantity(item.getQuantity() - 1);
                 notifyItemChanged(position);
-                quantityChangeListener.onQuantityChanged(); // Cập nhật tổng giá
+                quantityChangeListener.onQuantityChanged();
             }
         });
 
@@ -60,7 +65,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         holder.btnIncrease.setOnClickListener(v -> {
             item.setQuantity(item.getQuantity() + 1);
             notifyItemChanged(position);
-            quantityChangeListener.onQuantityChanged(); // Cập nhật tổng giá
+            quantityChangeListener.onQuantityChanged();
         });
 
         // Xử lý nút xóa sản phẩm
@@ -68,7 +73,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             cartItems.remove(position);
             notifyItemRemoved(position);
             notifyItemRangeChanged(position, cartItems.size());
-            quantityChangeListener.onQuantityChanged(); // Cập nhật tổng giá
+            quantityChangeListener.onQuantityChanged();
         });
     }
 
@@ -91,6 +96,19 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             btnIncrease = itemView.findViewById(R.id.btn_increase);
             btnDecrease = itemView.findViewById(R.id.btn_decrease);
             btnRemove = itemView.findViewById(R.id.btn_remove);
+        }
+    }
+
+    // Hàm load ảnh từ assets/image/
+    private void loadImageFromAssets(ImageView imageView, String imagePath) {
+        try {
+            InputStream inputStream = context.getAssets().open("image/" + imagePath); // Đọc ảnh từ assets/image/
+            Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+            imageView.setImageBitmap(bitmap);
+            inputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            imageView.setImageResource(R.drawable.ic_launcher_background); // Ảnh mặc định nếu lỗi
         }
     }
 
