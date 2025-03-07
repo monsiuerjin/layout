@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 public class CartActivity extends AppCompatActivity implements CartAdapter.OnQuantityChangeListener {
@@ -28,16 +27,8 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.OnQua
         // Ánh xạ TextView hiển thị tổng giá
         txtTotalPrice = findViewById(R.id.txt_total_price);
 
-        // Danh sách giỏ hàng
-        cartItems = new ArrayList<>();
-        for (CartItem product : CartManager.getCartItems()) {
-            cartItems.add(new CartItem(
-                    product.getName(),
-                    (int) product.getPrice(), // Chuyển sang int để tính toán chính xác
-                    product.getImagePath(),  // Sử dụng imagePath (String)
-                    1 // Mặc định số lượng là 1
-            ));
-        }
+        // Lấy giỏ hàng tạm thời từ ProductDetailActivity
+        cartItems = ProductDetailActivity.getTempCart();
 
         // Thiết lập RecyclerView
         RecyclerView recyclerView = findViewById(R.id.recycler_cart);

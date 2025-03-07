@@ -2,21 +2,15 @@ package com.example.layout_main;
 
 public class CartItem {
     private String name;
-    private int price; // Chuyển price thành int để dễ tính toán
-    private String imagePath; // Đổi từ int imageResourceId sang String imagePath
-    private int quantity; // Thêm số lượng sản phẩm
+    private int price;
+    private String imagePath;
+    private int quantity;
 
     public CartItem(String name, int price, String imagePath, int quantity) {
         this.name = name;
         this.price = price;
         this.imagePath = imagePath;
-        this.quantity = quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        if (quantity > 0) {
-            this.quantity = quantity;
-        }
+        this.quantity = Math.max(quantity, 1); // Đảm bảo số lượng >= 1 khi tạo
     }
 
     public String getName() {
@@ -27,7 +21,13 @@ public class CartItem {
         return price;
     }
 
-    public String getImagePath() { // Thay đổi từ getImageResourceId() thành getImagePath()
+    public void setPrice(int price) {
+        if (price >= 0) {
+            this.price = price;
+        }
+    }
+
+    public String getImagePath() {
         return imagePath;
     }
 
@@ -35,13 +35,17 @@ public class CartItem {
         return quantity;
     }
 
+    public void setQuantity(int quantity) {
+        this.quantity = Math.max(quantity, 0); // Cho phép đặt về 0 nếu cần
+    }
+
     public void increaseQuantity() {
-        this.quantity++;
+        quantity++;
     }
 
     public void decreaseQuantity() {
-        if (this.quantity > 1) {
-            this.quantity--;
+        if (quantity > 0) {
+            quantity--;
         }
     }
 }
