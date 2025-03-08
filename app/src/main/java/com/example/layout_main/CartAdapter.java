@@ -45,7 +45,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         CartItem item = cartItems.get(position);
 
         holder.name.setText(item.getName());
-        holder.price.setText(formatCurrency(item.getPrice() * item.getQuantity()));
+        holder.price.setText(formatCurrency(item.getPrice()));
         holder.quantity.setText(String.valueOf(item.getQuantity()));
         loadImageFromAssets(holder.image, item.getImagePath());
 

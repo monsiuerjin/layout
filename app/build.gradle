@@ -26,6 +26,9 @@ android {
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
     }
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+    }
 }
 
 dependencies {
@@ -40,4 +43,6 @@ dependencies {
     androidTestImplementation libs.espresso.core
     implementation 'com.google.code.gson:gson:2.8.9'
 
+    //API payOS
+    implementation 'vn.payos:payos-java:1.0.0' // Thay phiên bản mới nhất tại đây
 }

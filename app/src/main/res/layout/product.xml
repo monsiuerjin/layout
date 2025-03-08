@@ -1,32 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/products"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_margin="4dp">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="170dp"
-        android:layout_height="match_parent"
-        android:layout_marginStart="17dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="16dp"
-        android:orientation="vertical"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
         app:cardCornerRadius="10dp"
         app:cardElevation="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="#FBFCFF"
-            >
+            android:background="#FFFFFF"
+            android:padding="8dp"
+            android:gravity="center_horizontal">
 
-           <TextView
+            <TextView
                 android:id="@+id/discountBadge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -38,110 +35,79 @@
                 android:textStyle="bold"
                 android:textSize="12sp"
                 android:gravity="center"
-                android:layout_marginTop="6dp"
-                android:layout_marginStart="6dp"
-                android:layout_gravity="top|start"
-                android:elevation="3dp"/>
-
+                android:elevation="3dp"
+                android:layout_gravity="start" />
 
             <ImageView
                 android:id="@+id/productImg"
-                android:layout_width="wrap_content"
-                android:layout_height="100dp"
-                android:layout_gravity="center"
-                android:adjustViewBounds="true"
-                android:cropToPadding="false"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/product_image" />
-
-
+                android:adjustViewBounds="true"
+                android:src="@drawable/product_image"
+                android:layout_marginTop="8dp" />
 
             <TextView
                 android:id="@+id/productName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="10dp"
-                android:layout_marginEnd="5dp"
-                android:layout_marginStart="5dp"
+                android:layout_marginTop="8dp"
                 android:maxLines="2"
                 android:ellipsize="end"
-                android:scrollHorizontally="true"
-                android:singleLine="false"
                 android:text="AKG N700NCM2 Wireless Headphones"
                 android:textColor="#000"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:gravity="center" />
 
             <LinearLayout
-                android:padding="5dp"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_height="wrap_content">
+                android:gravity="center"
+                android:layout_marginTop="6dp">
 
-                <!-- LinearLayout chứa giá tiền và giá cũ -->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                <!-- Giá tiền hiện tại -->
-                <TextView
-                    android:id="@+id/productPrice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="13.99 triệu đ"
-                    android:layout_marginStart="3dp"
-                    android:textColor="#DE0000"
-                    android:textSize="16sp"
-                android:textStyle="bold"
-                android:fontFamily="sans-serif-medium" />
-
-                <!-- Giá cũ và mũi tên giảm giá -->
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="vertical"
+                    android:gravity="center">
 
-                    <!-- Giá cũ -->
+                    <TextView
+                        android:id="@+id/productPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="13.99 triệu đ"
+                        android:textColor="#DE0000"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:gravity="center" />
+
                     <TextView
                         android:id="@+id/productOldprice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
                         android:text="15.00 triệu đ"
                         android:textColor="#808080"
                         android:textSize="13sp"
                         android:textStyle="normal"
-                        android:fontFamily="sans-serif-medium" />
-
-                    <!-- Mũi tên giảm giá -->
-
+                        android:gravity="center" />
                 </LinearLayout>
-            </LinearLayout>
 
-            <!-- Phần trăm giảm giá -->
                 <TextView
                     android:id="@+id/productDisc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
                     android:layout_marginLeft="8dp"
                     android:background="@drawable/custom_discount"
                     android:gravity="center"
                     android:text="50%"
-                    android:textAlignment="center"
                     android:textColor="#FFFFFF"
                     android:textSize="14sp"
                     android:textStyle="bold"
-                    android:padding="8dp"
-                    android:elevation="6dp"/> <!-- Hiệu ứng bóng -->
-
+                    android:padding="6dp"
+                    android:elevation="6dp" />
             </LinearLayout>
-
-
-
-
         </LinearLayout>
     </androidx.cardview.widget.CardView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
